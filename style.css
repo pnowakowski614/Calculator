@@ -1,0 +1,46 @@
+body {
+    background-color: rgb(117, 78, 34);
+}
+
+#container {
+    background-color: rgb(148, 139, 139);
+    margin-left: 35%;
+    margin-top: 10%;
+    border-radius: 50px;
+    position: relative;
+    width: 500px;
+    height: 600px;
+}
+
+#display {
+    background-color: rgb(228, 217, 217);
+    display: flex;
+    position: absolute;
+    margin-top: 35px;
+    margin-left: 50px;
+    width: 400px;
+    height: 150px;
+    border-radius: 5px;
+}
+
+#buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 5px;
+    position: absolute;
+    border-radius: 5px;
+    margin-top: 200px;
+    margin-left: 50px;
+    width: 400px;
+    height: 350px;
+}
+
+.operators {
+    display: flex;
+    background-color: rgb(66, 65, 63);
+    font-size: 40px;
+    justify-content: center;
+    align-items: center;
+    color: rgb(168, 163, 154);
+}
