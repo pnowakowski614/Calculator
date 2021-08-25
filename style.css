@@ -49,3 +49,6 @@ body {
     color: rgb(168, 163, 154);
 }
 
+#buttons:hover {
+    cursor: pointer;
+}
