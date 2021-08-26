@@ -1,9 +1,11 @@
 let numbers = document.querySelectorAll(".numbers");
 let operators = document.querySelectorAll(".operators");
 let display = document.getElementById("display");
-let clear = document.getElementById("clear");
+let clr = document.getElementById("clear");
 let equals = document.getElementById("equals");
 let dlt = document.getElementById("delete");
+let plusminus = document.getElementById("plusminus");
+let period = document.getElementById("period");
 let displayValue;
 let firstValue;
 let secondValue;
@@ -11,6 +13,8 @@ let result = undefined;
 let newNumber = false;
 let operatorsClicked = false;
 let previousOperator = false;
+let isDecimal = false;
+let count = 9;
 const limit = 11;
 display.textContent = "0";
 
@@ -18,6 +22,18 @@ display.textContent = "0";
 
 function valueUpdate() {
     displayValue = Number(display.textContent);
+}
+
+//clear function
+
+function clear() {
+    display.textContent = "0";
+    firstValue = 0;
+    secondValue = 0;
+    result = undefined;
+    operatorsClicked = false;
+    previousOperator = false;
+    newNumber = false;
 }
 
 //updating the display
@@ -41,6 +57,28 @@ function displayUpdate(number) {
 function giveResult() {
     secondValue = displayValue;
     result = operate(firstValue, chosenOperator, secondValue);
+
+    if (result % 1 != 0) {
+        isDecimal = true;
+    }
+    else isDecimal = false;
+
+    while (result.toString().length > limit) {
+        if (isDecimal) {
+            result = result.toPrecision(count);
+            --count;
+        }
+        else {
+            alert("ERROR! The number is too big!")
+            clear();
+        }
+    }
+
+    if (typeof result === "string") {
+        result = Number(result);
+    }
+
+    count = 9;
     display.textContent = firstValue = result;
 }
 
@@ -73,16 +111,10 @@ for (let j = 0; j < operators.length; ++j) {
     })
 }
 
-//clear function
+//clear listener
 
-clear.addEventListener('click', function() {
-    display.textContent = "0";
-    firstValue = 0;
-    secondValue = 0;
-    result = undefined;
-    operatorsClicked = false;
-    previousOperator = false;
-    newNumber = false;
+clr.addEventListener('click', function() {
+    clear();
     valueUpdate();
 })
 
@@ -95,9 +127,21 @@ equals.addEventListener('click', function() {
     newNumber = true;
 })
 
+//delete function
+
 dlt.addEventListener('click', function() {
+    if(display.textContent === "0") {
+        return;
+    }
     display.textContent = display.textContent.substring(0, display.textContent.length - 1);
     valueUpdate();
+    firstValue = displayValue;
+})
+
+plusminus.addEventListener('click', function() {
+    valueUpdate();
+    displayValue *= -1
+    display.textContent = displayValue;
     firstValue = displayValue;
 })
 
@@ -117,7 +161,9 @@ function subtract(a,b) {
 
 function divide(a,b) {
     if(b === 0) {
-        return alert("You can't divide by zero!");
+        alert("You can't divide by zero!");
+        clear();
+        return;
     }
     return a / b;
 }
