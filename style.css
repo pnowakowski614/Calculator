@@ -2,11 +2,16 @@ body {
     background-color: rgb(117, 78, 34);
 }
 
-h1 {
+h1, h4 {
     margin-left: 600px;
     font-size: 80px;
     color:rgb(255, 153, 0);
     font-family: 'Courier New', Courier, monospace;
+}
+
+h4 {
+    font-size: 20px;
+    margin-left: 500px;
 }
 
 #container {

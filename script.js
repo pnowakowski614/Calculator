@@ -204,3 +204,11 @@ function operate(a, operator, b) {
         default: break;
     }
 }
+
+//keyboard support 
+
+window.addEventListener('keydown', function(e) {
+    const selected = document.querySelector(`div[data-key="${e.key}"]`);
+    selected.click();
+    console.log(selected);
+}) 
