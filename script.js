@@ -148,6 +148,9 @@ dlt.addEventListener('click', function() {
         return;
     }
     display.textContent = display.textContent.substring(0, display.textContent.length - 1);
+    if(display.textContent.length === 0) {
+        display.textContent = "0";
+    }
     valueUpdate();
     firstValue = displayValue;
 })
