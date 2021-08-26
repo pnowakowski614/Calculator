@@ -17,6 +17,7 @@ let isDecimal = false;
 let count = 9;
 const limit = 11;
 display.textContent = "0";
+valueUpdate();
 
 //taking the value from display
 
@@ -24,7 +25,7 @@ function valueUpdate() {
     displayValue = Number(display.textContent);
 }
 
-//clear function
+//clearing function
 
 function clear() {
     display.textContent = "0";
@@ -58,13 +59,8 @@ function giveResult() {
     secondValue = displayValue;
     result = operate(firstValue, chosenOperator, secondValue);
 
-    if (result % 1 != 0) {
-        isDecimal = true;
-    }
-    else isDecimal = false;
-
     while (result.toString().length > limit) {
-        if (isDecimal) {
+        if (result % 1 != 0) {
             result = result.toPrecision(count);
             --count;
         }
@@ -91,6 +87,24 @@ for (let i = 0; i < numbers.length; ++i) {
     valueUpdate();
     }) 
 }
+
+//typing in the period
+
+period.addEventListener('click', function() {
+    valueUpdate();
+    if((displayValue % 1 != 0) || display.textContent.substring(display.textContent.length-1, display.textContent.length) === ".") {
+        return;
+    }
+    else {
+        if(newNumber) {
+            display.textContent = "0.";
+            newNumber = false;
+            result = undefined;
+        }
+        else display.textContent += ".";
+        valueUpdate();
+    }
+})
 
 //choosing an operator
 
